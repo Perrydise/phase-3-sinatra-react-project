@@ -7,5 +7,11 @@ class ApplicationController < Sinatra::Base
     dealerships.to_json
   end
 
+  get '/dealerships/:id' do
+    dealership = Dealership.find(param[:id])
+    dealership.to_json(include :cars)
+  end
+
+
 
 end
