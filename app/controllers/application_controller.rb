@@ -17,6 +17,11 @@ class ApplicationController < Sinatra::Base
     cars.to_json
   end
 
+  get '/cars/highest_value' do
+    cars = Car.by_price.first
+    cars.to_json
+  end
+
 
 
 end
