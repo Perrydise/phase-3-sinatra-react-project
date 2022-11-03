@@ -27,6 +27,18 @@ class ApplicationController < Sinatra::Base
     cars.to_json
   end
 
+  post '/cars' do
+    car = Car.create(
+      make: params[:make],
+      model: params[:model],
+      year: params[:year],
+      color: params[:color]
+      dealership: params[:dealership]
+    )
+    car.to_json
+  end
+
+
 
 
 end
