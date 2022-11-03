@@ -22,6 +22,11 @@ class ApplicationController < Sinatra::Base
     cars.to_json
   end
 
+  get '/cars/lowest_value' do
+    cars = Car.by_price.last
+    cars.to_json
+  end
+
 
 
 end
