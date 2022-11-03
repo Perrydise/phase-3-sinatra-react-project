@@ -50,8 +50,9 @@ class ApplicationController < Sinatra::Base
     car.to_json
   end
 
-
-
-
-
+  delete '/cars/:id' do
+    car = Car.find(params[:id])
+    car.destroy
+    car.to_json
+  end
 end
