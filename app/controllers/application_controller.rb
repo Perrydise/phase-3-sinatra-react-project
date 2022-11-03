@@ -12,6 +12,11 @@ class ApplicationController < Sinatra::Base
     dealership.to_json(include :cars)
   end
 
+  get '/cars/by_price' do
+    cars = Car.by_price.
+    cars.to_json
+  end
+
 
 
 end
