@@ -38,6 +38,19 @@ class ApplicationController < Sinatra::Base
     car.to_json
   end
 
+  patch '/cars/:id' do
+    car = Car.find(params[:id])
+    car.update(
+      make: params[:make],
+      model: params[:model],
+      year: params[:year],
+      color: params[:color]
+      dealership: params[:dealership]
+    )
+    car.to_json
+  end
+
+
 
 
 
