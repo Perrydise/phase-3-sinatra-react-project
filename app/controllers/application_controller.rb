@@ -7,6 +7,11 @@ class ApplicationController < Sinatra::Base
     dealerships.to_json
   end
 
+  get "/cars" do
+    cars = Car.all
+    cars.to_json
+  end
+
   get '/dealerships/:id' do
     dealership = Dealership.find(param[:id])
     dealership.to_json(include :cars)
@@ -28,26 +33,45 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/cars' do
+    puts params
+    puts params[:dealership]
+    puts params[:make]
+    puts params[:color]
+    dealership_name = Dealership.find(params[:dealership]).name
     car = Car.create(
+      price: params[:price],
       make: params[:make],
       model: params[:model],
       year: params[:year],
-      color: params[:color]
-      dealership: params[:dealership]
+      color: params[:color],
+      dealership_id: params[:dealership],
+      dealership_name: dealership_name
     )
     car.to_json
   end
 
+  post '/dealerships' do
+    dealership = Dealership.create(
+      name: params[:name]
+    )
+    dealership.to_json
+  end
+
   patch '/cars/:id' do
+    puts params[:id]
+    puts params
     car = Car.find(params[:id])
+    puts car
     car.update(
       make: params[:make],
       model: params[:model],
       year: params[:year],
-      color: params[:color]
-      dealership: params[:dealership]
+      color: params[:color],
+      price: params[:price].to_i
     )
+    puts car
     car.to_json
+    puts car
   end
 
   delete '/cars/:id' do
